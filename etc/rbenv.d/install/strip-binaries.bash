@@ -16,9 +16,14 @@ strip_binaries()
 		LIBRUBY_FILE="libruby.${MAJOR_VERSION}.dylib"
 		SO_FILES="*.bundle"
 		;;
-	*)
+	FreeBSD)
 		STRIP_CMD="/usr/bin/strip"
 		LIBRUBY_FILE="libruby.so.${MAJOR_VERSION/./}"
+		SO_FILES="*.so"
+		;;
+	*)
+		STRIP_CMD="/usr/bin/strip"
+		LIBRUBY_FILE="libruby.so.${VERSION_NAME}"
 		SO_FILES="*.so"
 		;;
 	esac

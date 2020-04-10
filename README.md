@@ -1,5 +1,7 @@
 # rbenv-strip-binaries
 
+![Shellcheck](https://github.com/jlduran/rbenv-strip-binaries/workflows/Shellcheck/badge.svg)
+
 This rbenv plugin hooks into the `rbenv install` command to
 automatically strip binaries every time you install a new version of
 Ruby.

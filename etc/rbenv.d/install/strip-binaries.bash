@@ -10,9 +10,17 @@ strip_binaries()
 	STRIP_CMD="/usr/bin/strip"
 	PREFIX_PATH="${RBENV_ROOT}/versions/${VERSION_NAME}"
 	MAJOR_VERSION=${VERSION_NAME%.*}
-	SHLIB_VER=${MAJOR_VERSION/./}
+
+	case $(uname -s) in
+	Darwin)
+		LIBRUBY_FILE="libruby.${MAJOR_VERSION}.dylib"
+		;;
+	*)
+		LIBRUBY_FILE="libruby.so.${MAJOR_VERSION/./}"
+		;;
+	esac
 
 	${STRIP_CMD} "${PREFIX_PATH}/bin/ruby"
-	${STRIP_CMD} "${PREFIX_PATH}/lib/libruby.so.${SHLIB_VER}"
+	${STRIP_CMD} "${PREFIX_PATH}/lib/${LIBRUBY_FILE}"
 	find "${PREFIX_PATH}/lib/ruby/${MAJOR_VERSION}.0" -type f -name "*.so" -exec ${STRIP_CMD} {} \;
 }

@@ -7,7 +7,7 @@ strip_binaries()
 	# Strip binaries only after successfully installing Ruby.
 	[ "$STATUS" = "0" ] || return 0
 
-	STRIP_CMD="strip -s"
+	STRIP_CMD="/usr/bin/strip"
 	PREFIX_PATH="${RBENV_ROOT}/versions/${VERSION_NAME}"
 	MAJOR_VERSION=${VERSION_NAME%.*}
 	SHLIB_VER=${MAJOR_VERSION/./}

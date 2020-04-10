@@ -14,13 +14,15 @@ strip_binaries()
 	case $(uname -s) in
 	Darwin)
 		LIBRUBY_FILE="libruby.${MAJOR_VERSION}.dylib"
+		SO_FILES="*.bundle"
 		;;
 	*)
 		LIBRUBY_FILE="libruby.so.${MAJOR_VERSION/./}"
+		SO_FILES="*.so"
 		;;
 	esac
 
 	${STRIP_CMD} "${PREFIX_PATH}/bin/ruby"
 	${STRIP_CMD} "${PREFIX_PATH}/lib/${LIBRUBY_FILE}"
-	find "${PREFIX_PATH}/lib/ruby/${MAJOR_VERSION}.0" -type f -name "*.so" -exec ${STRIP_CMD} {} \;
+	find "${PREFIX_PATH}/lib/ruby/${MAJOR_VERSION}.0" -type f -name "${SO_FILES}" -exec ${STRIP_CMD} {} \;
 }
